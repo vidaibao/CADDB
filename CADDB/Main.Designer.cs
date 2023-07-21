@@ -29,26 +29,58 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLoadPlines = new System.Windows.Forms.Button();
+            this.btnLoadMText = new System.Windows.Forms.Button();
             this.btnLoadLines = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.btnLoadBlockNoAttribute = new System.Windows.Forms.Button();
+            this.btnLoadBlocksWithAttributes = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnLoadBlocksWithAttributes);
+            this.groupBox1.Controls.Add(this.btnLoadBlockNoAttribute);
+            this.groupBox1.Controls.Add(this.btnLoadPlines);
+            this.groupBox1.Controls.Add(this.btnLoadMText);
             this.groupBox1.Controls.Add(this.btnLoadLines);
             this.groupBox1.Location = new System.Drawing.Point(33, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(185, 287);
+            this.groupBox1.Size = new System.Drawing.Size(177, 330);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create";
+            // 
+            // btnLoadPlines
+            // 
+            this.btnLoadPlines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnLoadPlines.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnLoadPlines.Location = new System.Drawing.Point(13, 141);
+            this.btnLoadPlines.Name = "btnLoadPlines";
+            this.btnLoadPlines.Size = new System.Drawing.Size(150, 50);
+            this.btnLoadPlines.TabIndex = 1;
+            this.btnLoadPlines.Text = "Load Polylines";
+            this.btnLoadPlines.UseVisualStyleBackColor = false;
+            this.btnLoadPlines.Click += new System.EventHandler(this.btnLoadPlines_Click);
+            // 
+            // btnLoadMText
+            // 
+            this.btnLoadMText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnLoadMText.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnLoadMText.Location = new System.Drawing.Point(13, 83);
+            this.btnLoadMText.Name = "btnLoadMText";
+            this.btnLoadMText.Size = new System.Drawing.Size(150, 50);
+            this.btnLoadMText.TabIndex = 1;
+            this.btnLoadMText.Text = "Load MTexts";
+            this.btnLoadMText.UseVisualStyleBackColor = false;
+            this.btnLoadMText.Click += new System.EventHandler(this.btnLoadMText_Click);
             // 
             // btnLoadLines
             // 
             this.btnLoadLines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnLoadLines.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnLoadLines.Location = new System.Drawing.Point(17, 29);
+            this.btnLoadLines.Location = new System.Drawing.Point(13, 26);
             this.btnLoadLines.Name = "btnLoadLines";
             this.btnLoadLines.Size = new System.Drawing.Size(150, 50);
             this.btnLoadLines.TabIndex = 0;
@@ -59,11 +91,35 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(31, 340);
+            this.lblInfo.Location = new System.Drawing.Point(31, 371);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(11, 12);
             this.lblInfo.TabIndex = 1;
             this.lblInfo.Text = "-";
+            // 
+            // btnLoadBlockNoAttribute
+            // 
+            this.btnLoadBlockNoAttribute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnLoadBlockNoAttribute.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnLoadBlockNoAttribute.Location = new System.Drawing.Point(13, 201);
+            this.btnLoadBlockNoAttribute.Name = "btnLoadBlockNoAttribute";
+            this.btnLoadBlockNoAttribute.Size = new System.Drawing.Size(150, 50);
+            this.btnLoadBlockNoAttribute.TabIndex = 2;
+            this.btnLoadBlockNoAttribute.Text = "Load Blocks No Attribute";
+            this.btnLoadBlockNoAttribute.UseVisualStyleBackColor = false;
+            this.btnLoadBlockNoAttribute.Click += new System.EventHandler(this.btnLoadBlockNoAttribute_Click);
+            // 
+            // btnLoadBlocksWithAttributes
+            // 
+            this.btnLoadBlocksWithAttributes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnLoadBlocksWithAttributes.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnLoadBlocksWithAttributes.Location = new System.Drawing.Point(13, 260);
+            this.btnLoadBlocksWithAttributes.Name = "btnLoadBlocksWithAttributes";
+            this.btnLoadBlocksWithAttributes.Size = new System.Drawing.Size(150, 50);
+            this.btnLoadBlocksWithAttributes.TabIndex = 3;
+            this.btnLoadBlocksWithAttributes.Text = "Load Blocks With Attributes";
+            this.btnLoadBlocksWithAttributes.UseVisualStyleBackColor = false;
+            this.btnLoadBlocksWithAttributes.Click += new System.EventHandler(this.btnLoadBlocksWithAttributes_Click);
             // 
             // Main
             // 
@@ -85,5 +141,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLoadLines;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnLoadMText;
+        private System.Windows.Forms.Button btnLoadPlines;
+        private System.Windows.Forms.Button btnLoadBlockNoAttribute;
+        private System.Windows.Forms.Button btnLoadBlocksWithAttributes;
     }
 }

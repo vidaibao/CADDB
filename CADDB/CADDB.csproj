@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonUtil.cs" />
     <Compile Include="DBLoadUtil.cs" />
     <Compile Include="DBUtil.cs" />
     <Compile Include="Main.cs">

@@ -22,5 +22,30 @@ namespace CADDB
             DBLoadUtil dBLoadUtil = new DBLoadUtil();
             lblInfo.Text = dBLoadUtil.LoadLines();
         }
+
+        
+        private void btnLoadMText_Click(object sender, EventArgs e)
+        {
+            DBLoadUtil dBLoadUtil = new DBLoadUtil();
+            lblInfo.Text = dBLoadUtil.LoadMTexts();
+        }
+
+        private void btnLoadPlines_Click(object sender, EventArgs e)
+        {
+            DBLoadUtil dBLoadUtil = new DBLoadUtil();
+            lblInfo.Text = dBLoadUtil.LoadPolyLines();
+        }
+
+        private void btnLoadBlockNoAttribute_Click(object sender, EventArgs e)
+        {
+            DBLoadUtil dBLoadUtil = new DBLoadUtil();
+            lblInfo.Text = dBLoadUtil.LoadBlocksNoAttribute();
+        }
+
+        private void btnLoadBlocksWithAttributes_Click(object sender, EventArgs e)
+        {
+            DBLoadUtil dBLoadUtil = new DBLoadUtil();
+            lblInfo.Text = dBLoadUtil.LoadBlocksWithAttribute();
+        }
     }
 }

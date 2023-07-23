@@ -47,5 +47,23 @@ namespace CADDB
             DBLoadUtil dBLoadUtil = new DBLoadUtil();
             lblInfo.Text = dBLoadUtil.LoadBlocksWithAttribute();
         }
+
+        private void btnRetrieveLines_Click(object sender, EventArgs e)
+        {
+            DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
+            lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawLines();
+        }
+
+        private void btnRetrieveMTexts_Click(object sender, EventArgs e)
+        {
+            DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
+            lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawMTexts();
+        }
+
+        private void btnRetrieveDrawPLines_Click(object sender, EventArgs e)
+        {
+            DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
+            lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawPLines();
+        }
     }
 }

@@ -2,7 +2,6 @@
 
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.AutoCAD.Runtime;
 using Autodesk.AutoCAD.EditorInput;
 
 using System.Data;
@@ -204,6 +203,7 @@ namespace CADDB
                         string layer = "", ltype = "", coords = "";
                         double len = 0.0;
                         bool isClosed = false;
+                        
                         Polyline pline = new Polyline();
                         SelectionSet ss = psr.Value as SelectionSet;
 
@@ -212,7 +212,7 @@ namespace CADDB
 
                         conn.Open();
 
-                        // Loop through the ss n insert into DB, one line at a time
+                        // Loop through the ss n insert into DB, one pline at a time
                         foreach (SelectedObject sObj in ss)
                         {
                             pline = tr.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;

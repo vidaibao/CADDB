@@ -39,6 +39,7 @@
             this.btnRetrieveMTexts = new System.Windows.Forms.Button();
             this.btnRetrieveLines = new System.Windows.Forms.Button();
             this.btnRetrieveDrawPLines = new System.Windows.Forms.Button();
+            this.btnRetrieveAnhDrawBlocksNoAttribute = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -128,6 +129,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnRetrieveAnhDrawBlocksNoAttribute);
             this.groupBox2.Controls.Add(this.btnRetrieveDrawPLines);
             this.groupBox2.Controls.Add(this.btnRetrieveMTexts);
             this.groupBox2.Controls.Add(this.btnRetrieveLines);
@@ -174,6 +176,18 @@
             this.btnRetrieveDrawPLines.UseVisualStyleBackColor = false;
             this.btnRetrieveDrawPLines.Click += new System.EventHandler(this.btnRetrieveDrawPLines_Click);
             // 
+            // btnRetrieveAnhDrawBlocksNoAttribute
+            // 
+            this.btnRetrieveAnhDrawBlocksNoAttribute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Location = new System.Drawing.Point(17, 201);
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Name = "btnRetrieveAnhDrawBlocksNoAttribute";
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Size = new System.Drawing.Size(150, 50);
+            this.btnRetrieveAnhDrawBlocksNoAttribute.TabIndex = 3;
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Text = "Retrieve Draw Blocks No Attribute";
+            this.btnRetrieveAnhDrawBlocksNoAttribute.UseVisualStyleBackColor = false;
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Click += new System.EventHandler(this.btnRetrieveAnhDrawBlocksNoAttribute_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -204,5 +218,6 @@
         private System.Windows.Forms.Button btnRetrieveLines;
         private System.Windows.Forms.Button btnRetrieveMTexts;
         private System.Windows.Forms.Button btnRetrieveDrawPLines;
+        private System.Windows.Forms.Button btnRetrieveAnhDrawBlocksNoAttribute;
     }
 }

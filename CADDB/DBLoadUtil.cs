@@ -300,7 +300,7 @@ namespace CADDB
                                 insPtX = blk.Position.X;
                                 insPtY = blk.Position.Y;
                                 insPt = insPtX.ToString() + "," + insPtY.ToString();
-                                blkName = blk.BlockName;
+                                blkName = blk.Name; // .Name not . BlockName
                                 layer = blk.Layer;
                                 rotation = blk.Rotation;
 
@@ -340,8 +340,8 @@ namespace CADDB
 
 
 
-        // Load all the Blocks (With Attribute) into DB 
-        public string LoadBlocksWithAttribute()
+        // Load all the Blocks (With Attributes) into DB 
+        public string LoadBlocksWithAttributes()
         {
             string result = null;
             SqlConnection conn = DBUtil.GetConnection();
@@ -382,7 +382,7 @@ namespace CADDB
                                 insPtX = blk.Position.X;
                                 insPtY = blk.Position.Y;
                                 insPt = insPtX.ToString() + "," + insPtY.ToString();
-                                blkName = blk.BlockName;
+                                blkName = blk.Name;
                                 layer = blk.Layer;
                                 rotation = blk.Rotation;
 

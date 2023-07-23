@@ -45,7 +45,7 @@ namespace CADDB
         private void btnLoadBlocksWithAttributes_Click(object sender, EventArgs e)
         {
             DBLoadUtil dBLoadUtil = new DBLoadUtil();
-            lblInfo.Text = dBLoadUtil.LoadBlocksWithAttribute();
+            lblInfo.Text = dBLoadUtil.LoadBlocksWithAttributes();
         }
 
         private void btnRetrieveLines_Click(object sender, EventArgs e)
@@ -64,6 +64,12 @@ namespace CADDB
         {
             DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
             lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawPLines();
+        }
+
+        private void btnRetrieveAnhDrawBlocksNoAttribute_Click(object sender, EventArgs e)
+        {
+            DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
+            lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawBlocksNoAttribute();
         }
     }
 }

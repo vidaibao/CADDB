@@ -305,7 +305,7 @@ namespace CADDB
                             Point2d pt;
                             int j = 0;
                             // get a pair at a time
-                            for (int i = 0; i <= vertices.Length - 2; i += 2)
+                            for (int i = 0; i <= vertices.Length - 2; i += 2)   // <=
                             {
                                 PtX = Convert.ToDouble(vertices[i]);
                                 PtY = Convert.ToDouble(vertices[i + 1]);
@@ -342,6 +342,151 @@ namespace CADDB
 
 
 
+
+
+
+
+        public string RetrieveAndDrawBlocksNoAttribute()
+        {
+            string result = "";
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                conn = DBUtil.GetConnection();
+                string sql = "SELECT Id, InsertionPt, BlockName, Layer, Rotation FROM dbo.BlocksNoAttribute WHERE IsDeleted IS NULL";
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    Document doc = Application.DocumentManager.MdiActiveDocument;
+                    Database db = doc.Database;
+                    Editor ed = doc.Editor;
+
+                    doc.LockDocument();
+                    using (Transaction trans = db.TransactionManager.StartTransaction())
+                    {
+                        doc.Editor.WriteMessage("Drawing Blocks No Attribute!");
+                        BlockTable bt = trans.GetObject(db.BlockTableId, OpenMode.ForRead) as BlockTable;
+                        BlockTableRecord btr = trans.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+
+                        int id;
+                        string layer = "", blkName = "", insertionPt = "";
+                        string[] insPt;
+                        double insPtX = 0.0, insPtY = 0.0;
+                        double rotation = 0.0;
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            id = Convert.ToInt32(dr["Id"]);
+                            insertionPt = dr["InsertionPt"].ToString();
+                            insPt = insertionPt.Split(',');
+                            insPtX = Convert.ToDouble(insPt[0]);
+                            insPtY = Convert.ToDouble(insPt[1]);
+                            Point3d insPoint = new Point3d(insPtX, insPtY, 0);
+                            blkName = dr["BlockName"].ToString();
+                            layer = dr["Layer"].ToString();
+                            rotation = Convert.ToDouble(dr["Rotation"]);
+                            ObjectId blkId = bt[blkName];
+
+                            BlockReference blk = new BlockReference(insPoint, blkId);
+                            blk.Layer = layer;
+                            blk.Rotation = rotation;
+                            
+                            btr.AppendEntity(blk);
+                            trans.AddNewlyCreatedDBObject(blk, true);
+                            CommonUtil.AddXDataToEntity("CADDB", blk, id);
+                        }
+                        trans.Commit();
+                    }
+                }
+                result = "Done. Completed retrieve and draw Blocks No Attribute successfully!";
+            }
+            catch (Exception ex)
+            {
+                result = "Error encountered: " + ex.Message;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return result;
+        }
+
+
+
+
+
+        public string RetrieveAndDrawBlocksWithAttributes()
+        {
+            string result = "";
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                conn = DBUtil.GetConnection();
+                string sql = "SELECT Id, InsertionPt, BlockName, Layer, Rotation, Attributes FROM dbo.BlocksWithAttributes WHERE IsDeleted IS NULL";
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    Document doc = Application.DocumentManager.MdiActiveDocument;
+                    Database db = doc.Database;
+                    Editor ed = doc.Editor;
+
+                    doc.LockDocument();
+                    using (Transaction trans = db.TransactionManager.StartTransaction())
+                    {
+                        doc.Editor.WriteMessage("Drawing Blocks With Attributes!");
+                        BlockTable bt = trans.GetObject(db.BlockTableId, OpenMode.ForRead) as BlockTable;
+                        BlockTableRecord btr = trans.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+
+                        int id;
+                        string layer = "", blkName = "", insertionPt = "";
+                        string[] insPt;
+                        double insPtX = 0.0, insPtY = 0.0;
+                        double rotation = 0.0;
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            id = Convert.ToInt32(dr["Id"]);
+                            insertionPt = dr["InsertionPt"].ToString();
+                            insPt = insertionPt.Split(',');
+                            insPtX = Convert.ToDouble(insPt[0]);
+                            insPtY = Convert.ToDouble(insPt[1]);
+                            Point3d insPoint = new Point3d(insPtX, insPtY, 0);
+                            blkName = dr["BlockName"].ToString();
+                            layer = dr["Layer"].ToString();
+                            rotation = Convert.ToDouble(dr["Rotation"]);
+                            ObjectId blkId = bt[blkName];
+
+                            BlockReference blk = new BlockReference(insPoint, blkId);
+                            blk.Layer = layer;
+                            blk.Rotation = rotation;
+
+                            btr.AppendEntity(blk);
+                            trans.AddNewlyCreatedDBObject(blk, true);
+                            CommonUtil.AddXDataToEntity("CADDB", blk, id);
+                        }
+                        trans.Commit();
+                    }
+                }
+                result = "Done. Completed retrieve and draw Blocks With Attributes successfully!";
+            }
+            catch (Exception ex)
+            {
+                result = "Error encountered: " + ex.Message;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return result;
+        }
 
 
     }

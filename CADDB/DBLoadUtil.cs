@@ -393,6 +393,8 @@ namespace CADDB
                                     AttributeReference attRef = obj as AttributeReference;
                                     if (attRef != null)
                                     {
+                                        //attributes += attRef.TextString + ",";
+                                        //attributes += attRef.Tag + "=" + attRef.TextString + "|" + "Rotation=" + attRef.Rotation + ",";
                                         attributes += attRef.Tag + "*" + attRef.TextString + ",";
                                     }
                                 }

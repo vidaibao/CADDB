@@ -71,5 +71,11 @@ namespace CADDB
             DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
             lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawBlocksNoAttribute();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DBRetrieveUtil dBRetrieveUtil = new DBRetrieveUtil();
+            lblInfo.Text = dBRetrieveUtil.RetrieveAndDrawBlocksWithAttributes();
+        }
     }
 }

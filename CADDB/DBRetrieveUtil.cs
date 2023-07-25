@@ -198,7 +198,7 @@ namespace CADDB
 
                         int id = 0;
                         double insPtX = 0.0, insPtY = 0.0;
-                        string layer = "", color = "", txtStyle = "", text = "";
+                        string layer = "", txtStyle = "", text = "";
                         double height = 0.0, width = 0.0;
                         int attachment = 0;
                         TextStyleTable textStyleTable = tr.GetObject(db.TextStyleTableId, OpenMode.ForRead) as TextStyleTable;
@@ -289,7 +289,6 @@ namespace CADDB
                         int id;
                         string layer = "", ltype = "", coords = "";
                         string[] vertices;
-                        double length = 0.0;
                         double PtX = 0.0, PtY = 0.0;
                         bool IsClosed = false;
                         foreach (DataRow dr in dt.Rows)
@@ -419,6 +418,109 @@ namespace CADDB
 
 
 
+
+
+
+        public string RetrieveAndDrawBlocksWithAttributes000()
+        {
+            string result = "";
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                conn = DBUtil.GetConnection();
+                string sql = "SELECT Id, InsertionPt, BlockName, Layer, Rotation, Attributes FROM dbo.BlocksWithAttributes WHERE IsDeleted IS NULL";
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    Document doc = Application.DocumentManager.MdiActiveDocument;
+                    Database db = doc.Database;
+                    Editor ed = doc.Editor;
+
+                    doc.LockDocument();
+                    using (Transaction trans = db.TransactionManager.StartTransaction())
+                    {
+                        ed.WriteMessage("Drawing Blocks with Attributes!");
+                        BlockTable bt = trans.GetObject(db.BlockTableId, OpenMode.ForRead) as BlockTable;
+                        BlockTableRecord ms = bt[BlockTableRecord.ModelSpace].GetObject(OpenMode.ForWrite) as BlockTableRecord;
+
+                        int id;
+                        string layer = "", blkName = "";
+                        string coord;
+                        string[] pts;
+                        Point3d insPt;
+                        string attr = "", attrVal = "";
+                        string[] attributes, attrValue;
+                        double rotation = 0.0;
+                        BlockReference newBlock;
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            id = Convert.ToInt32(dr["Id"]);
+                            coord = dr["InsertionPt"].ToString();
+                            pts = coord.Split(',');
+                            insPt = new Point3d(Convert.ToDouble(pts[0]), Convert.ToDouble(pts[1]), 0);
+                            layer = dr["Layer"].ToString();
+                            rotation = Convert.ToDouble(dr["Rotation"]);
+                            attr = dr["Attributes"].ToString();
+                            attributes = attr.Split(',');
+
+                            // Create a new Block object
+                            blkName = dr["BlockName"].ToString();
+                            BlockTableRecord btr = bt[blkName].GetObject(OpenMode.ForRead) as BlockTableRecord;
+                            newBlock = new BlockReference(insPt, btr.ObjectId);
+                            newBlock.Layer = layer;
+                            newBlock.Rotation = rotation;
+                            ms.AppendEntity(newBlock);
+                            trans.AddNewlyCreatedDBObject(newBlock, true);
+                            CommonUtil.AddXDataToEntity("CADDB", newBlock, id);
+                            int i = 0;
+
+                            // Create the Attributes
+                            foreach (ObjectId objId in btr)
+                            {
+                                DBObject obj = objId.GetObject(OpenMode.ForRead);
+                                AttributeDefinition attDef = obj as AttributeDefinition;
+                                if (attDef != null)
+                                //if ((attDef != null) && (!attDef.Constant))
+                                {
+                                    using (AttributeReference attRef = new AttributeReference())
+                                    {
+                                        attRef.SetAttributeFromBlock(attDef, newBlock.BlockTransform);
+                                        attrValue = attributes[i].Split('=');
+                                        attrVal = attrValue[1];
+                                        attRef.TextString = attrVal;
+                                        attRef.Rotation = rotation;
+
+                                        newBlock.AttributeCollection.AppendAttribute(attRef);
+                                        trans.AddNewlyCreatedDBObject(attRef, true);
+                                    }
+                                    i += 1;
+                                }
+                            }
+                        }
+                        trans.Commit();
+                    }
+                }
+                result = "Done. Completed successfully!";
+            }
+            catch (Exception ex)
+            {
+                result = "Error encountered: " + ex.Message;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return result;
+        }
+
+
+
+
         public string RetrieveAndDrawBlocksWithAttributes()
         {
             string result = "";
@@ -441,13 +543,15 @@ namespace CADDB
                     {
                         doc.Editor.WriteMessage("Drawing Blocks With Attributes!");
                         BlockTable bt = trans.GetObject(db.BlockTableId, OpenMode.ForRead) as BlockTable;
-                        BlockTableRecord btr = trans.GetObject(bt[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+                        BlockTableRecord ms = bt[BlockTableRecord.ModelSpace].GetObject(OpenMode.ForWrite) as BlockTableRecord;
 
                         int id;
                         string layer = "", blkName = "", insertionPt = "";
-                        string[] insPt;
+                        string[] insPt, attributes, attrValue;
+                        string attr = "", attrVal = "";
                         double insPtX = 0.0, insPtY = 0.0;
                         double rotation = 0.0;
+                        BlockReference newBlock;
                         foreach (DataRow dr in dt.Rows)
                         {
                             id = Convert.ToInt32(dr["Id"]);
@@ -456,18 +560,45 @@ namespace CADDB
                             insPtX = Convert.ToDouble(insPt[0]);
                             insPtY = Convert.ToDouble(insPt[1]);
                             Point3d insPoint = new Point3d(insPtX, insPtY, 0);
-                            blkName = dr["BlockName"].ToString();
                             layer = dr["Layer"].ToString();
                             rotation = Convert.ToDouble(dr["Rotation"]);
+                            attr = dr["Attributes"].ToString();
+                            attributes = attr.Split(',');
+
+                            // Create a new Block object
+                            blkName = dr["BlockName"].ToString();
                             ObjectId blkId = bt[blkName];
+                            BlockTableRecord btr = blkId.GetObject(OpenMode.ForRead) as BlockTableRecord;
+                            newBlock = new BlockReference(insPoint, btr.ObjectId);
+                            newBlock.Layer = layer;
+                            newBlock.Rotation = rotation;
 
-                            BlockReference blk = new BlockReference(insPoint, blkId);
-                            blk.Layer = layer;
-                            blk.Rotation = rotation;
+                            ms.AppendEntity(newBlock);
+                            trans.AddNewlyCreatedDBObject(newBlock, true);
+                            CommonUtil.AddXDataToEntity("CADDB", newBlock, id);
+                            int i = 0;
 
-                            btr.AppendEntity(blk);
-                            trans.AddNewlyCreatedDBObject(blk, true);
-                            CommonUtil.AddXDataToEntity("CADDB", blk, id);
+                            // Create the Attributes
+                            foreach (ObjectId objId in btr)
+                            {
+                                DBObject obj = objId.GetObject(OpenMode.ForRead);
+                                AttributeDefinition attDef = obj as AttributeDefinition;
+                                if (attDef != null) //if ((attDef != null) && (!attDef.Constant))
+                                {
+                                    using (AttributeReference attRef = new AttributeReference())
+                                    {
+                                        attRef.SetAttributeFromBlock(attDef, newBlock.BlockTransform);
+                                        attrValue = attributes[i].Split('*'); // Load attributes += attRef.Tag + "*" + attRef.TextString + ",";
+                                        attrVal = attrValue[1];
+                                        attRef.TextString = attrVal;
+                                        attRef.Rotation = rotation;
+
+                                        newBlock.AttributeCollection.AppendAttribute(attRef);
+                                        trans.AddNewlyCreatedDBObject(attRef, true);
+                                    }
+                                    i++;
+                                }
+                            }
                         }
                         trans.Commit();
                     }

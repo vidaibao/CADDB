@@ -36,10 +36,11 @@
             this.btnLoadLines = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRetrieveAnhDrawBlocksNoAttribute = new System.Windows.Forms.Button();
+            this.btnRetrieveDrawPLines = new System.Windows.Forms.Button();
             this.btnRetrieveMTexts = new System.Windows.Forms.Button();
             this.btnRetrieveLines = new System.Windows.Forms.Button();
-            this.btnRetrieveDrawPLines = new System.Windows.Forms.Button();
-            this.btnRetrieveAnhDrawBlocksNoAttribute = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -129,6 +130,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btnRetrieveAnhDrawBlocksNoAttribute);
             this.groupBox2.Controls.Add(this.btnRetrieveDrawPLines);
             this.groupBox2.Controls.Add(this.btnRetrieveMTexts);
@@ -139,6 +141,30 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Retrieve";
+            // 
+            // btnRetrieveAnhDrawBlocksNoAttribute
+            // 
+            this.btnRetrieveAnhDrawBlocksNoAttribute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Location = new System.Drawing.Point(17, 201);
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Name = "btnRetrieveAnhDrawBlocksNoAttribute";
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Size = new System.Drawing.Size(150, 50);
+            this.btnRetrieveAnhDrawBlocksNoAttribute.TabIndex = 3;
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Text = "Retrieve Draw Blocks No Attribute";
+            this.btnRetrieveAnhDrawBlocksNoAttribute.UseVisualStyleBackColor = false;
+            this.btnRetrieveAnhDrawBlocksNoAttribute.Click += new System.EventHandler(this.btnRetrieveAnhDrawBlocksNoAttribute_Click);
+            // 
+            // btnRetrieveDrawPLines
+            // 
+            this.btnRetrieveDrawPLines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnRetrieveDrawPLines.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnRetrieveDrawPLines.Location = new System.Drawing.Point(17, 141);
+            this.btnRetrieveDrawPLines.Name = "btnRetrieveDrawPLines";
+            this.btnRetrieveDrawPLines.Size = new System.Drawing.Size(149, 49);
+            this.btnRetrieveDrawPLines.TabIndex = 2;
+            this.btnRetrieveDrawPLines.Text = "Retrieve Draw PLines";
+            this.btnRetrieveDrawPLines.UseVisualStyleBackColor = false;
+            this.btnRetrieveDrawPLines.Click += new System.EventHandler(this.btnRetrieveDrawPLines_Click);
             // 
             // btnRetrieveMTexts
             // 
@@ -164,29 +190,17 @@
             this.btnRetrieveLines.UseVisualStyleBackColor = false;
             this.btnRetrieveLines.Click += new System.EventHandler(this.btnRetrieveLines_Click);
             // 
-            // btnRetrieveDrawPLines
+            // button1
             // 
-            this.btnRetrieveDrawPLines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.btnRetrieveDrawPLines.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnRetrieveDrawPLines.Location = new System.Drawing.Point(17, 141);
-            this.btnRetrieveDrawPLines.Name = "btnRetrieveDrawPLines";
-            this.btnRetrieveDrawPLines.Size = new System.Drawing.Size(149, 49);
-            this.btnRetrieveDrawPLines.TabIndex = 2;
-            this.btnRetrieveDrawPLines.Text = "Retrieve Draw PLines";
-            this.btnRetrieveDrawPLines.UseVisualStyleBackColor = false;
-            this.btnRetrieveDrawPLines.Click += new System.EventHandler(this.btnRetrieveDrawPLines_Click);
-            // 
-            // btnRetrieveAnhDrawBlocksNoAttribute
-            // 
-            this.btnRetrieveAnhDrawBlocksNoAttribute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.btnRetrieveAnhDrawBlocksNoAttribute.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnRetrieveAnhDrawBlocksNoAttribute.Location = new System.Drawing.Point(17, 201);
-            this.btnRetrieveAnhDrawBlocksNoAttribute.Name = "btnRetrieveAnhDrawBlocksNoAttribute";
-            this.btnRetrieveAnhDrawBlocksNoAttribute.Size = new System.Drawing.Size(150, 50);
-            this.btnRetrieveAnhDrawBlocksNoAttribute.TabIndex = 3;
-            this.btnRetrieveAnhDrawBlocksNoAttribute.Text = "Retrieve Draw Blocks No Attribute";
-            this.btnRetrieveAnhDrawBlocksNoAttribute.UseVisualStyleBackColor = false;
-            this.btnRetrieveAnhDrawBlocksNoAttribute.Click += new System.EventHandler(this.btnRetrieveAnhDrawBlocksNoAttribute_Click);
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(17, 260);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 50);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Retrieve Draw Blocks With Attributes";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Main
             // 
@@ -219,5 +233,6 @@
         private System.Windows.Forms.Button btnRetrieveMTexts;
         private System.Windows.Forms.Button btnRetrieveDrawPLines;
         private System.Windows.Forms.Button btnRetrieveAnhDrawBlocksNoAttribute;
+        private System.Windows.Forms.Button button1;
     }
 }

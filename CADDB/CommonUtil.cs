@@ -91,5 +91,33 @@ namespace CADDB
             }
             return color;
         }
+
+        public static int ReadXDataFromEntity(string appName, Entity ent)
+        {
+            Int32 id = 0;
+            Document doc = Application.DocumentManager.MdiActiveDocument;
+            Database db = doc.Database;
+            Transaction tr = db.TransactionManager.StartTransaction();
+            using (tr)
+            {
+                ResultBuffer rb = ent.GetXDataForApplication(appName);
+                if (rb != null)
+                {
+                    TypedValue[] arr = rb.AsArray();
+                    foreach (TypedValue tv in arr)
+                    {
+                        switch ((DxfCode)tv.TypeCode)
+                        {
+                            case DxfCode.ExtendedDataInteger32:
+                                id = Convert.ToInt32(tv.Value);
+                                break;
+                        }
+                    }
+                    rb.Dispose();
+                }
+
+            }
+            return id;
+        }
     }
 }

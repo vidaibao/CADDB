@@ -74,8 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonUtil.cs" />
+    <Compile Include="DBDeleteUtil.cs" />
     <Compile Include="DBLoadUtil.cs" />
     <Compile Include="DBRetrieveUtil.cs" />
+    <Compile Include="DBUpdateUtil.cs" />
     <Compile Include="DBUtil.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
